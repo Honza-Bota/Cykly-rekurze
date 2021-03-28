@@ -2,4 +2,4 @@
 S = 1 + x/1! - x2/2! + x3/3! - ... + xn/n!
 
 Napište varianty metod s cyklem for, while a do-while.
-Napište rekurentní variantu metody.
+Napište rekurentní variantu metody.	

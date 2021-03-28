@@ -20,10 +20,17 @@ namespace Cykly_rekurze
                 Console.Write("Zadej druhé číslo 'n': ");
                 int n = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("--------------------");
-                Console.WriteLine("Součet pomocí cyklu 'for':        " + SoucetFor(x, n));
-                Console.WriteLine("Součet pomocí cyklu 'while':      " + SoucetWhile(x, n));
-                Console.WriteLine("Součet pomocí cyklu 'do-while':   " + SoucetDoWhile(x, n));
-                Console.WriteLine("Součet pomocí rekurentní metody:  " + SoucetRekurent(x, n));
+                try
+                {
+                    Console.WriteLine("Součet pomocí cyklu 'for':        " + SoucetFor(x, n));
+                    Console.WriteLine("Součet pomocí cyklu 'while':      " + SoucetWhile(x, n));
+                    Console.WriteLine("Součet pomocí cyklu 'do-while':   " + SoucetDoWhile(x, n));
+                    Console.WriteLine("Součet pomocí rekurentní metody:  " + SoucetRekurent(x, n));
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                }
                 Console.WriteLine("--------------------");
                 Console.WriteLine("Pro ukončení stiskněte 'k'. Jinak jedeme znovu ;)");
                 cki = Console.ReadKey();
@@ -31,24 +38,55 @@ namespace Cykly_rekurze
             } while (cki.Key != ConsoleKey.K);
         }
 
-        private static string SoucetFor(int x, int n)
+        private static int SoucetFor(int x, int n)
         {
-            return "Hi";
+            int soucet = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                soucet += x * i / Factorial(i);
+            }
+            return soucet;
         }
 
-        private static string SoucetWhile(int x, int n)
+        private static int SoucetWhile(int x, int n)
         {
-            return "Hi";
+            int soucet = 1;
+            while (0 != n)
+            {
+                soucet += x * n / Factorial(n);
+                n--;
+            }
+            return soucet;
         }
 
-        private static string SoucetDoWhile(int x, int n)
+        private static int SoucetDoWhile(int x, int n)
         {
-            return "Hi";
+            int soucet = 1;
+            do
+            {
+                soucet += x * n / Factorial(n);
+                n--;
+
+            } while (0 != n);
+            return soucet;
         }
 
-        private static string SoucetRekurent(int x, int n)
+        private static int SoucetRekurent(int x, int n, int soucet = 1)
         {
-            return "Hi";
+            if (n == 0) return soucet;
+            else 
+            {
+                soucet += x * n / Factorial(n);
+                return SoucetRekurent(x, n - 1, soucet); 
+            }
+        }
+
+        private static int Factorial(int f)
+        {
+            if (f == 0)
+                return 1;
+            else
+                return f * Factorial(f - 1);
         }
     }
 }
